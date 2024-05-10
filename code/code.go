@@ -16,6 +16,8 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) any {
 	}
 
 	switch operandCount {
+	case 0:
+		return def.Name
 	case 1:
 		return fmt.Sprintf("%s %d", def.Name, operands[0])
 	}
@@ -48,6 +50,7 @@ type Opcode byte
 
 const (
 	OpConstant Opcode = iota // constant 풀에서 index 위치에 있는 constant를 가져오는 명령어
+	OpAdd                    // 스택에서 상위 2개의 값을 꺼내서 더한 결과를 다시 스택에 넣는 명령어
 )
 
 // Definition : For debugging purposes
@@ -58,6 +61,7 @@ type Definition struct {
 
 var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}}, // 첫번째 인자가 2바이트의 크기를 가짐
+	OpAdd:      {"OpAdd", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
