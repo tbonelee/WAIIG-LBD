@@ -57,6 +57,9 @@ const (
 	OpDiv                    // 스택에서 상위 2개의 값을 꺼내서 나눈 결과를 다시 스택에 넣는 명령어
 	OpTrue
 	OpFalse
+	OpEqual
+	OpNotEqual
+	OpGreaterThan
 )
 
 // Definition : For debugging purposes
@@ -66,14 +69,17 @@ type Definition struct {
 }
 
 var definitions = map[Opcode]*Definition{
-	OpConstant: {"OpConstant", []int{2}}, // 첫번째 인자가 2바이트의 크기를 가짐
-	OpAdd:      {"OpAdd", []int{}},
-	OpPop:      {"OpPop", []int{}},
-	OpSub:      {"OpSub", []int{}},
-	OpMul:      {"OpMul", []int{}},
-	OpDiv:      {"OpDiv", []int{}},
-	OpTrue:     {"OpTrue", []int{}},
-	OpFalse:    {"OpFalse", []int{}},
+	OpConstant:    {"OpConstant", []int{2}}, // 첫번째 인자가 2바이트의 크기를 가짐
+	OpAdd:         {"OpAdd", []int{}},
+	OpPop:         {"OpPop", []int{}},
+	OpSub:         {"OpSub", []int{}},
+	OpMul:         {"OpMul", []int{}},
+	OpDiv:         {"OpDiv", []int{}},
+	OpTrue:        {"OpTrue", []int{}},
+	OpFalse:       {"OpFalse", []int{}},
+	OpEqual:       {"OpEqual", []int{}},
+	OpNotEqual:    {"OpNotEqual", []int{}},
+	OpGreaterThan: {"OpGreaterThan", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {

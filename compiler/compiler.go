@@ -57,6 +57,22 @@ func (c *Compiler) Compile(node ast.Node) error {
 		c.emit(code.OpPop)
 
 	case *ast.InfixExpression:
+		// "<" 연산자는 GT 연산자로 대체하기 위해 피연산자 순서를 바꿔서 emit
+		if node.Operator == "<" {
+			err := c.Compile(node.Right)
+			if err != nil {
+				return err
+			}
+
+			err = c.Compile(node.Left)
+			if err != nil {
+				return err
+			}
+
+			c.emit(code.OpGreaterThan)
+			return nil
+		}
+
 		err := c.Compile(node.Left)
 		if err != nil {
 			return err
@@ -76,6 +92,12 @@ func (c *Compiler) Compile(node ast.Node) error {
 			c.emit(code.OpMul)
 		case "/":
 			c.emit(code.OpDiv)
+		case ">":
+			c.emit(code.OpGreaterThan)
+		case "==":
+			c.emit(code.OpEqual)
+		case "!=":
+			c.emit(code.OpNotEqual)
 		default:
 			return fmt.Errorf("unknown operator %s", node.Operator)
 		}
