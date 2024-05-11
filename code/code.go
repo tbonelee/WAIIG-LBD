@@ -52,6 +52,9 @@ const (
 	OpConstant Opcode = iota // constant 풀에서 index 위치에 있는 constant를 가져오는 명령어
 	OpAdd                    // 스택에서 상위 2개의 값을 꺼내서 더한 결과를 다시 스택에 넣는 명령어
 	OpPop                    // 스택에서 값을 꺼내는 명령어
+	OpSub                    // 스택에서 상위 2개의 값을 꺼내서 뺀 결과를 다시 스택에 넣는 명령어
+	OpMul                    // 스택에서 상위 2개의 값을 꺼내서 곱한 결과를 다시 스택에 넣는 명령어
+	OpDiv                    // 스택에서 상위 2개의 값을 꺼내서 나눈 결과를 다시 스택에 넣는 명령어
 )
 
 // Definition : For debugging purposes
@@ -64,6 +67,9 @@ var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}}, // 첫번째 인자가 2바이트의 크기를 가짐
 	OpAdd:      {"OpAdd", []int{}},
 	OpPop:      {"OpPop", []int{}},
+	OpSub:      {"OpSub", []int{}},
+	OpMul:      {"OpMul", []int{}},
+	OpDiv:      {"OpDiv", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
