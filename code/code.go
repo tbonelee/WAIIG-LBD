@@ -55,6 +55,8 @@ const (
 	OpSub                    // 스택에서 상위 2개의 값을 꺼내서 뺀 결과를 다시 스택에 넣는 명령어
 	OpMul                    // 스택에서 상위 2개의 값을 꺼내서 곱한 결과를 다시 스택에 넣는 명령어
 	OpDiv                    // 스택에서 상위 2개의 값을 꺼내서 나눈 결과를 다시 스택에 넣는 명령어
+	OpTrue
+	OpFalse
 )
 
 // Definition : For debugging purposes
@@ -70,6 +72,8 @@ var definitions = map[Opcode]*Definition{
 	OpSub:      {"OpSub", []int{}},
 	OpMul:      {"OpMul", []int{}},
 	OpDiv:      {"OpDiv", []int{}},
+	OpTrue:     {"OpTrue", []int{}},
+	OpFalse:    {"OpFalse", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {

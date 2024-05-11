@@ -84,6 +84,13 @@ func (c *Compiler) Compile(node ast.Node) error {
 		integer := &object.Integer{Value: node.Value}
 		// integer object를 상수풀에 추가하고 상수풀의 인덱스와 함께 OpConstant를 emit
 		c.emit(code.OpConstant, c.addConstant(integer))
+
+	case *ast.Boolean:
+		if node.Value {
+			c.emit(code.OpTrue)
+		} else {
+			c.emit(code.OpFalse)
+		}
 	}
 
 	return nil
